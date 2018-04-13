@@ -40,8 +40,8 @@ export default class Example extends Component {
             </Animated>
           </List>
 
-          <Animated /* fade on mount/unmount a single conditional node */>
-            <Animated items>
+          <Animated /* fade on mount a single conditional node */>
+            <Animated items /* fade on unmount a single conditional node */>
               {this.state.list.length > 0 && (
                 <Animated item>
                   <Typography variant="caption" style={styles.caption}>

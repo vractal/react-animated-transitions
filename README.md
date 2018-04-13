@@ -26,17 +26,6 @@ import Animated from 'react-animated-transitions';
     </Animated>
   ))}
 </Animated>;
-
-// fade on mount/unmount a single conditional node
-<Animated>
-  <Animated items>
-    {condition && (
-      <Animated item>
-        <Node />
-      </Animated>
-    )}
-  </Animated>
-</Animated>;
 ```
 
 ## Example
