@@ -10,12 +10,16 @@ import './fade.css';
 const Animated = ({ items, ...props }) => {
   if (items) return <TransitionGroup>{props.children}</TransitionGroup>;
 
-  if (!props.preset && !(props.enter || props.exit)) {
-    props.preset = 'react-animated-transitions-fade';
-    props.timeout = 400;
+  const { enter, exit, preset } = props;
+
+  const propsCopy = props;
+
+  if (!preset && !(enter || exit)) {
+    propsCopy.preset = 'react-animated-transitions-fade';
+    propsCopy.timeout = 400;
   }
 
-  return <Transition {...props} />;
+  return <Transition {...propsCopy} />;
 };
 
 Animated.propTypes = {
