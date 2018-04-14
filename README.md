@@ -4,11 +4,13 @@
 
 <img src="https://raw.githubusercontent.com/sonaye/react-animated-transitions/master/demo.gif" width="600">
 
-# Installation
+## Installation
 
-`yarn add react-transition-group react-animated-transitions`
+`yarn add react-transition-group animate.css react-animated-transitions`
 
-# Usage
+`animate.css` is optional, but without it you will have to write your own transition presets. The package includes only a single preset out of the box (fade transition).
+
+## Usage
 
 ```javascript
 import Animated from 'react-animated-transitions';
@@ -22,22 +24,29 @@ import Animated from 'react-animated-transitions';
 <Animated items>
   {foos.map(() => <Animated item><Foo /></Animated>)}
 </Animated>
+```
 
-// available presets
-<Animated preset="fade" /> // default
-<Animated preset="scale" />
-<Animated preset="slideLeft" />
-<Animated preset="slideRight" />
-// want more presets out of the box? PRs are welcome!
+### Usage with `animate.css` transition presets
 
-// a preset is not needed for <Animated items />
-// you can use a preset with <Animated /> and <Animated item />
+[List of available animations](https://github.com/daneden/animate.css/blob/master/animate-config.json) in `animate.css`.
 
-// to pass a custom preset, you need to add its css first
-// take a look a the css of the included presets to get an idea
-// it is based on react-transition-group
+```javascript
+import 'animate.css'; // once, you don't need it if you are using your custom presets
+// you can also create a custom build with only the presets you are using
 
-// foo.css
+<Animated enter="fadeIn" exit="fadeOut" /> // default, this is equivalent to just <Animated />
+<Animated enter="tada" exit="zoomOut" /> // you can use any combination
+```
+
+Presets are not needed for `<Animated items />`, you can use them with `<Animated />` and `<Animated item />`.
+
+### Usage with a custom transition preset
+
+To pass a custom preset, you need to add its css first, which is based on [react-transition-group](https://github.com/reactjs/react-transition-group).
+
+```css
+/* foo.css */
+
 .foo-appear,
 .foo-enter {
   /* transition state at 0% */
@@ -58,19 +67,51 @@ import Animated from 'react-animated-transitions';
   /* transition definition */
 }
 
-// ..
+/* take a look at the included fade preset source to get an idea */
+```
 
+Then in your JavaScript:
+
+```javascript
 import './foo.css';
 
-<Animated preset="foo">
-  <Bar />
-</Animated>
+<Animated custom="foo" />; // notice that foo is the used as unique identifier in the css
+```
 
-// to pass a custom timeout in ms (it should match your css)
-<Animated preset="foo" timeout={1000}>
-  <Baz />
-</Animated>
-// included presets have a default 400ms timeout, you can customize your own presets only
+### Passing a custom timeout
+
+The timeout should be in ms and should match the css.
+
+```javascript
+<Animated timeout={1000} /> // default
+```
+
+### Overwriting `animate.css` duration and delay props
+
+`animate.css` presets have a default timeout of 1000ms.
+
+```css
+/* overwrite.css */
+
+/* global */
+.animated {
+  animation-duration: 3s;
+  animation-delay: 2s;
+  animation-iteration-count: infinite;
+}
+
+/* specific */
+.animated.fadeIn {
+  animation-duration: 3s;
+  animation-delay: 2s;
+  animation-iteration-count: infinite;
+}
+```
+
+```javascript
+import './overwrite.css'; // make sure you include animate.css before this line
+
+<Animated timeout={3000} />;
 ```
 
 ## Example

@@ -4,41 +4,74 @@ import lorem from 'lorem-ipsum';
 
 import Button from 'material-ui/Button';
 import List, { ListItem, ListItemText } from 'material-ui/List';
+import Menu, { MenuItem } from 'material-ui/Menu';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 
+import 'animate.css';
+
+import './overwrite.css';
+
 import Animated from '../lib/Animated';
 
-import './custom.css';
+import animations from './animations';
+
+const timeout = 400;
 
 export default class Example extends Component {
-  state = { list: ['Hello World!'], preset: 'fade', timeout: 400 };
+  state = {
+    list: ['Hello World!'],
+    enter: undefined,
+    exit: undefined,
+    random: true
+  };
 
-  add = () => this.setState({ list: this.state.list.concat(lorem()) });
+  setEnter = enter => this.setState({ enter, enterAnchorEl: null });
+  setExit = exit => this.setState({ exit, exitAnchorEl: null });
+
+  enterOpen = e => this.setState({ enterAnchorEl: e.currentTarget });
+  enterClose = () => this.setState({ enterAnchorEl: null });
+
+  exitOpen = e => this.setState({ exitAnchorEl: e.currentTarget });
+  exitClose = () => this.setState({ exitAnchorEl: null });
+
+  random = () => {
+    this.setEnter(
+      animations.in[Math.floor(Math.random() * animations.in.length)]
+    );
+    this.setExit(
+      animations.out[Math.floor(Math.random() * animations.in.length)]
+    );
+  };
+
+  add = () =>
+    this.setState(
+      { list: this.state.list.concat(lorem()) },
+      () => this.state.random && this.random()
+    );
 
   clear = () => this.setState({ list: [] });
 
   remove = item =>
-    this.setState({
-      list: this.state.list.filter(i => item !== i)
-    });
+    this.setState(
+      { list: this.state.list.filter(i => item !== i) },
+      () => this.state.random && this.random()
+    );
 
-  renderPreset = preset => (
-    <Button
-      disabled={this.state.preset === preset}
-      onClick={() =>
-        this.setState({ preset, timeout: preset === 'custom' ? 1000 : 400 })
-      }
-      style={styles.btn}>
-      {preset}
-    </Button>
-  );
+  toggleRandom = () => this.setState({ random: !this.state.random });
 
   render() {
-    const { list, preset, timeout } = this.state;
+    const {
+      list,
+      enter,
+      exit,
+      enterAnchorEl,
+      exitAnchorEl,
+      random
+    } = this.state;
 
     return (
-      <Animated preset={preset} timeout={timeout}>
+      <Animated enter={enter} exit={exit} timeout={timeout}>
         <div style={styles.container}>
           <div style={styles.row}>
             <Button onClick={this.add} style={styles.btn} variant="raised">
@@ -46,24 +79,75 @@ export default class Example extends Component {
             </Button>
 
             <Button
-              disabled={this.state.list.length === 0}
+              disabled={list.length === 0}
               onClick={this.clear}
               style={styles.btn}
               variant="raised">
               Clear
             </Button>
 
-            {this.renderPreset('fade')}
-            {this.renderPreset('scale')}
-            {this.renderPreset('slideLeft')}
-            {this.renderPreset('slideRight')}
-            {this.renderPreset('custom')}
+            <Button
+              aria-haspopup
+              aria-owns="enter"
+              onClick={this.enterOpen}
+              style={{ ...styles.btn, ...{ width: 150 } }}>
+              {enter || 'fade'}
+            </Button>
+
+            <Button
+              aria-haspopup
+              aria-owns="exit"
+              onClick={this.exitOpen}
+              style={{ ...styles.btn, ...{ width: 150 } }}>
+              {exit || 'fade'}
+            </Button>
+
+            <Button onClick={this.toggleRandom} style={styles.btn}>
+              Random {random ? 'off' : 'on'}
+            </Button>
+
+            <Menu
+              anchorEl={enterAnchorEl}
+              id="enter"
+              onClose={this.enterClose}
+              open={Boolean(enterAnchorEl)}>
+              {animations.in.map((animation, i) => (
+                <MenuItem
+                  key={i}
+                  value={animation}
+                  onClick={() => this.setEnter(animation)}>
+                  {animation}
+                </MenuItem>
+              ))}
+            </Menu>
+
+            <Menu
+              anchorEl={exitAnchorEl}
+              id="exit"
+              onClose={this.exitClose}
+              open={Boolean(exitAnchorEl)}>
+              {animations.out.map((animation, i) => (
+                <MenuItem
+                  key={i}
+                  value={animation}
+                  onClick={() => this.setExit(animation)}>
+                  {animation}
+                </MenuItem>
+              ))}
+            </Menu>
           </div>
+
+          <div />
 
           <List>
             <Animated items>
               {list.map(item => (
-                <Animated preset={preset} timeout={timeout} key={item} item>
+                <Animated
+                  key={item}
+                  enter={enter}
+                  exit={exit}
+                  timeout={timeout}
+                  item>
                   <Paper square style={styles.paper}>
                     <ListItem button onClick={() => this.remove(item)}>
                       <ListItemText primary={item} />
@@ -74,11 +158,11 @@ export default class Example extends Component {
             </Animated>
           </List>
 
-          <Animated preset={preset} timeout={timeout}>
+          <Animated enter={enter} exit={exit} timeout={timeout}>
             <Animated items>
               {list.length > 0 && (
-                <Animated preset={preset} timeout={timeout} item>
-                  <Typography variant="caption" style={styles.caption}>
+                <Animated enter={enter} exit={exit} timeout={timeout} item>
+                  <Typography variant="caption">
                     Click an item to remove it
                   </Typography>
                 </Animated>
@@ -100,8 +184,8 @@ const styles = {
     padding: 40
   },
   btn: {
-    boxShadow: '4px 4px 0 rgba(0, 0, 0, 0.1)',
     borderRadius: 0,
+    boxShadow: '4px 4px 0 rgba(0, 0, 0, 0.1)',
     margin: 5
   },
   paper: {
@@ -110,8 +194,5 @@ const styles = {
     marginTop: 10,
     width: 300
   },
-  caption: { marginBottom: 40 },
-  row: {
-    display: 'flex'
-  }
+  row: { display: 'flex' }
 };
