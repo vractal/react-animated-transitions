@@ -12,7 +12,7 @@ class Transition extends Component {
   state = { in: false };
 
   componentDidMount() {
-    this.setState({ in: true });
+    if (!this.props.item) this.setState({ in: true });
   }
 
   render() {

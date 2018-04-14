@@ -2,7 +2,7 @@
   "license": "MIT",
   "name": "react-animated-transitions",
   "description": "Easy animated transitions in React.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "dist/Animated.js",
   "repository": {
     "type": "git",
