@@ -10,8 +10,8 @@ import './fade.css';
 const Animated = ({ items, ...props }) => {
   if (items) return <TransitionGroup>{props.children}</TransitionGroup>;
 
-  if (!props.custom && !(props.enter || props.exit)) {
-    props.custom = 'react-animated-transitions-fade';
+  if (!props.preset && !(props.enter || props.exit)) {
+    props.preset = 'react-animated-transitions-fade';
     props.timeout = 400;
   }
 
@@ -20,20 +20,20 @@ const Animated = ({ items, ...props }) => {
 
 Animated.propTypes = {
   children: PropTypes.any.isRequired,
-  custom: PropTypes.string,
   enter: PropTypes.string,
   exit: PropTypes.string,
   item: PropTypes.bool,
   items: PropTypes.bool,
+  preset: PropTypes.string,
   timeout: PropTypes.number
 };
 
 Animated.defaultProps = {
-  custom: undefined,
   enter: undefined,
   exit: undefined,
   item: false,
   items: false,
+  preset: undefined,
   timeout: 1000
 };
 

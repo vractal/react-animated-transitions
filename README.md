@@ -26,7 +26,7 @@ import Animated from 'react-animated-transitions';
 </Animated>
 ```
 
-### Usage with `animate.css` transition presets
+### With `animate.css` transition presets
 
 [List of available animations](https://github.com/daneden/animate.css/blob/master/animate-config.json) in `animate.css`.
 
@@ -34,13 +34,14 @@ import Animated from 'react-animated-transitions';
 import 'animate.css'; // once, you don't need it if you are using your custom presets
 // you can also create a custom build with only the presets you are using
 
-<Animated enter="fadeIn" exit="fadeOut" /> // default, this is equivalent to just <Animated />
-<Animated enter="tada" exit="zoomOut" /> // you can use any combination
+// you can use any combination
+<Animated enter="fadeIn" exit="fadeOut" />
+<Animated enter="tada" exit="zoomOut" />
 ```
 
 Presets are not needed for `<Animated items />`, you can use them with `<Animated />` and `<Animated item />`.
 
-### Usage with a custom transition preset
+### With a custom transition preset
 
 To pass a custom preset, you need to add its css first, which is based on [react-transition-group](https://github.com/reactjs/react-transition-group).
 
@@ -75,15 +76,15 @@ Then in your JavaScript:
 ```javascript
 import './foo.css';
 
-<Animated custom="foo" />; // notice that foo is the used as unique identifier in the css
+<Animated preset="foo" />; // notice that foo is used as a unique identifier in the css
 ```
 
 ### Passing a custom timeout
 
-The timeout should be in ms and should match the css.
+The timeout should match the css transition duration.
 
 ```javascript
-<Animated timeout={1000} /> // default
+<Animated timeout={1000} /> // default is 1s, in ms
 ```
 
 ### Overwriting `animate.css` duration and delay props

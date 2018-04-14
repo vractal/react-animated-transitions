@@ -5,17 +5,17 @@ import PropTypes from 'prop-types';
 
 class Transition extends Component {
   static propTypes = {
-    custom: PropTypes.string,
     enter: PropTypes.string,
     exit: PropTypes.string,
     item: PropTypes.bool.isRequired,
+    preset: PropTypes.string,
     timeout: PropTypes.number.isRequired
   };
 
   static defaultProps = {
-    custom: undefined,
     enter: undefined,
-    exit: undefined
+    exit: undefined,
+    preset: undefined
   };
 
   state = { in: false };
@@ -25,35 +25,13 @@ class Transition extends Component {
   }
 
   render() {
-    const { custom, enter, exit, item, ...props } = this.props;
-
-    // experimenting with passing multiple presets, no good
-
-    // const classNames = {
-    //   appear: 'animated',
-    //   appearActive: '',
-    //   enter: 'animated',
-    //   enterActive: '',
-    //   exit: 'animated',
-    //   exitActive: ''
-    // };
-
-    // enter.split(' ').forEach(e => {
-    //   classNames.appearActive += `${e} `;
-    //   classNames.enterActive += `${e} `;
-    // });
-
-    // exit.split(' ').forEach(e => (classNames.exitActive += `${e} `));
-
-    // Object.keys(classNames).forEach(
-    //   k => (classNames[k] = classNames[k].trim())
-    // );
+    const { enter, exit, item, preset, ...props } = this.props;
 
     return (
       <CSSTransition
         {...props}
         classNames={
-          custom || {
+          preset || {
             appear: 'animated',
             appearActive: enter,
             enter: 'animated',

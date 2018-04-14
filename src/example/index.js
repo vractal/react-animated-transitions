@@ -20,9 +20,9 @@ const timeout = 400;
 
 export default class Example extends Component {
   state = {
+    enter: 'fadeIn',
+    exit: 'fadeOut',
     list: ['Hello World!'],
-    enter: undefined,
-    exit: undefined,
     random: true
   };
 
@@ -62,16 +62,22 @@ export default class Example extends Component {
 
   render() {
     const {
-      list,
       enter,
-      exit,
       enterAnchorEl,
+      exit,
       exitAnchorEl,
+      list,
       random
     } = this.state;
 
+    const transition = {
+      enter,
+      exit,
+      timeout
+    };
+
     return (
-      <Animated enter={enter} exit={exit} timeout={timeout}>
+      <Animated {...transition}>
         <div style={styles.container}>
           <div style={styles.row}>
             <Button onClick={this.add} style={styles.btn} variant="raised">
@@ -91,7 +97,7 @@ export default class Example extends Component {
               aria-owns="enter"
               onClick={this.enterOpen}
               style={{ ...styles.btn, ...{ width: 150 } }}>
-              {enter || 'fade'}
+              {enter}
             </Button>
 
             <Button
@@ -99,11 +105,11 @@ export default class Example extends Component {
               aria-owns="exit"
               onClick={this.exitOpen}
               style={{ ...styles.btn, ...{ width: 150 } }}>
-              {exit || 'fade'}
+              {exit}
             </Button>
 
             <Button onClick={this.toggleRandom} style={styles.btn}>
-              Random {random ? 'off' : 'on'}
+              {random ? 'Disable' : 'Enable'} random
             </Button>
 
             <Menu
@@ -114,8 +120,8 @@ export default class Example extends Component {
               {animations.in.map((animation, i) => (
                 <MenuItem
                   key={i}
-                  value={animation}
-                  onClick={() => this.setEnter(animation)}>
+                  onClick={() => this.setEnter(animation)}
+                  value={animation}>
                   {animation}
                 </MenuItem>
               ))}
@@ -129,8 +135,8 @@ export default class Example extends Component {
               {animations.out.map((animation, i) => (
                 <MenuItem
                   key={i}
-                  value={animation}
-                  onClick={() => this.setExit(animation)}>
+                  onClick={() => this.setExit(animation)}
+                  value={animation}>
                   {animation}
                 </MenuItem>
               ))}
@@ -142,12 +148,7 @@ export default class Example extends Component {
           <List>
             <Animated items>
               {list.map(item => (
-                <Animated
-                  key={item}
-                  enter={enter}
-                  exit={exit}
-                  timeout={timeout}
-                  item>
+                <Animated key={item} {...transition} item>
                   <Paper square style={styles.paper}>
                     <ListItem button onClick={() => this.remove(item)}>
                       <ListItemText primary={item} />
@@ -158,10 +159,10 @@ export default class Example extends Component {
             </Animated>
           </List>
 
-          <Animated enter={enter} exit={exit} timeout={timeout}>
+          <Animated {...transition}>
             <Animated items>
               {list.length > 0 && (
-                <Animated enter={enter} exit={exit} timeout={timeout} item>
+                <Animated {...transition} item>
                   <Typography variant="caption">
                     Click an item to remove it
                   </Typography>
