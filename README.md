@@ -26,6 +26,15 @@ import Animated from 'react-animated-transitions';
     </Animated>
   ))}
 </Animated>;
+
+// available presets
+<Animated preset="fade" /> // default
+<Animated preset="scale" />
+<Animated preset="slideLeft" />
+<Animated preset="slideRight" />
+
+// a preset is not needed for <Animated items />
+// you can use a preset with <Animated /> and <Animated item />
 ```
 
 ## Example

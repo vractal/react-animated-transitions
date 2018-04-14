@@ -5,10 +5,10 @@ import TransitionGroup from 'react-transition-group/TransitionGroup';
 
 import Transition from './Transition';
 
-import './types/Fade.css';
-import './types/Scale.css';
-import './types/SlideLeft.css';
-import './types/SlideRight.css';
+import './presets/Fade.css';
+import './presets/Scale.css';
+import './presets/SlideLeft.css';
+import './presets/SlideRight.css';
 
 const Animated = ({ items, ...props }) => {
   if (items)
@@ -21,13 +21,13 @@ Animated.propTypes = {
   children: PropTypes.any.isRequired,
   item: PropTypes.bool,
   items: PropTypes.bool,
-  type: PropTypes.oneOf(['fade', 'scale', 'slideLeft', 'slideRight'])
+  preset: PropTypes.oneOf(['fade', 'scale', 'slideLeft', 'slideRight'])
 };
 
 Animated.defaultProps = {
   item: false,
   items: false,
-  type: 'fade'
+  preset: 'fade'
 };
 
 export default Animated;

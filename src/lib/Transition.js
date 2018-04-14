@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 class Transition extends Component {
   static propTypes = {
     item: PropTypes.bool.isRequired,
-    type: PropTypes.string.isRequired
+    preset: PropTypes.string.isRequired
   };
 
   state = { in: false };
@@ -16,7 +16,7 @@ class Transition extends Component {
   }
 
   render() {
-    const { item, type, ...props } = this.props;
+    const { item, preset, ...props } = this.props;
 
     // experimenting with passing multiple presets, not good so far
 
@@ -29,7 +29,7 @@ class Transition extends Component {
     //   exitActive: ''
     // };
 
-    // type.split(' ').forEach(t => {
+    // preset.split(' ').forEach(t => {
     //   classNames.appear += `${t}-appear `;
     //   classNames.appearActive += `${t}-appear-active `;
     //   classNames.enter += `${t}-enter `;
@@ -45,7 +45,7 @@ class Transition extends Component {
     return (
       <CSSTransition
         {...props}
-        classNames={type}
+        classNames={preset}
         {...!item && { in: this.state.in }}
       />
     );

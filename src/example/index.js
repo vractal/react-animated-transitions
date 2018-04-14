@@ -1,35 +1,60 @@
 import React, { Component } from 'react';
 
+import lorem from 'lorem-ipsum';
+
 import Button from 'material-ui/Button';
 import List, { ListItem, ListItemText } from 'material-ui/List';
-import lorem from 'lorem-ipsum';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 
 import Animated from '../lib/Animated';
 
 export default class Example extends Component {
-  state = { list: ['Hello World!'] };
+  state = { list: ['Hello World!'], preset: 'fade' };
 
   add = () => this.setState({ list: this.state.list.concat(lorem()) });
+
+  clear = () => this.setState({ list: [] });
 
   remove = item =>
     this.setState({
       list: this.state.list.filter(i => item !== i)
     });
 
+  renderPreset = preset => (
+    <Button
+      disabled={this.state.preset === preset}
+      onClick={() => this.setState({ preset })}
+      style={styles.btn}>
+      {preset}
+    </Button>
+  );
+
   render() {
+    const { list, preset } = this.state;
+
     return (
-      <Animated /* fade on mount a single node */>
+      <Animated preset={preset}>
         <div style={styles.container}>
-          <Button onClick={this.add} style={styles.btn} variant="raised">
-            Add
-          </Button>
+          <div style={styles.row}>
+            <Button onClick={this.add} style={styles.btn} variant="raised">
+              Add
+            </Button>
+
+            <Button onClick={this.clear} style={styles.btn} variant="raised">
+              Clear
+            </Button>
+
+            {this.renderPreset('fade')}
+            {this.renderPreset('scale')}
+            {this.renderPreset('slideLeft')}
+            {this.renderPreset('slideRight')}
+          </div>
 
           <List>
-            <Animated items /* fade on mount/unmount a list of nodes */>
-              {this.state.list.map(item => (
-                <Animated key={item} item>
+            <Animated items>
+              {list.map(item => (
+                <Animated preset={preset} key={item} item>
                   <Paper square style={styles.paper}>
                     <ListItem button onClick={() => this.remove(item)}>
                       <ListItemText primary={item} />
@@ -40,10 +65,10 @@ export default class Example extends Component {
             </Animated>
           </List>
 
-          <Animated /* fade on mount a single conditional node */>
-            <Animated items /* fade on unmount a single conditional node */>
-              {this.state.list.length > 0 && (
-                <Animated item>
+          <Animated preset={preset}>
+            <Animated items>
+              {list.length > 0 && (
+                <Animated preset={preset} item>
                   <Typography variant="caption" style={styles.caption}>
                     Click an item to remove it
                   </Typography>
@@ -65,12 +90,19 @@ const styles = {
     flexDirection: 'column',
     padding: 40
   },
-  btn: { boxShadow: '4px 4px 0 rgba(0, 0, 0, 0.1)', borderRadius: 0 },
+  btn: {
+    boxShadow: '4px 4px 0 rgba(0, 0, 0, 0.1)',
+    borderRadius: 0,
+    margin: 5
+  },
   paper: {
     boxShadow: '4px 4px 0 rgba(0, 0, 0, 0.1)',
     marginBottom: 10,
     marginTop: 10,
     width: 300
   },
-  caption: { color: 'white', marginBottom: 40 }
+  caption: { marginBottom: 40 },
+  row: {
+    display: 'flex'
+  }
 };
