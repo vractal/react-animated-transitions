@@ -6,9 +6,15 @@ import TransitionGroup from 'react-transition-group/TransitionGroup';
 import TransitionItem from './TransitionItem';
 
 import Fade from './types/Fade';
+import Scale from './types/Scale';
+import SlideLeft from './types/SlideLeft';
+import SlideRight from './types/SlideRight';
 
 const types = {
-  fade: Fade
+  fade: Fade,
+  scale: Scale,
+  slideLeft: SlideLeft,
+  slideRight: SlideRight
 };
 
 const Animated = ({ items, type, ...props }) => {

@@ -2,18 +2,6 @@ import React from 'react';
 
 import CSSTransition from 'react-transition-group/CSSTransition';
 
-const Transition = props => (
-  <CSSTransition
-    classNames={{
-      appear: 'appear',
-      appearActive: 'appear-active',
-      enter: 'enter',
-      enterActive: 'enter-active',
-      exit: 'exit',
-      exitActive: 'exit-active'
-    }}
-    {...props}
-  />
-);
+const Transition = props => <CSSTransition {...props} />;
 
 export default Transition;
