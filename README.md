@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/react-animated-transitions.svg)](https://badge.fury.io/js/react-animated-transitions)
 
-<img src="https://raw.githubusercontent.com/sonaye/react-animated-transitions/master/demo.gif" width="400">
+<img src="https://raw.githubusercontent.com/sonaye/react-animated-transitions/master/demo.gif" width="600">
 
 # Installation
 
