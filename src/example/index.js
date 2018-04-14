@@ -41,7 +41,11 @@ export default class Example extends Component {
               Add
             </Button>
 
-            <Button onClick={this.clear} style={styles.btn} variant="raised">
+            <Button
+              disabled={this.state.list.length === 0}
+              onClick={this.clear}
+              style={styles.btn}
+              variant="raised">
               Clear
             </Button>
 
