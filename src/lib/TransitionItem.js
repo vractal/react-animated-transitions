@@ -8,7 +8,7 @@ class TransitionItem extends Component {
     Type: PropTypes.func.isRequired
   };
 
-  state = { in: undefined };
+  state = { in: false };
 
   componentDidMount() {
     this.setState({ in: true });

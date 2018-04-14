@@ -1,11 +1,11 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
-import { TransitionGroup } from 'react-transition-group';
+import TransitionGroup from 'react-transition-group/TransitionGroup';
 
 import TransitionItem from './TransitionItem';
 
-// import Fade from './types/Pure'; // with styled-components
+// import Fade from './types/Fade'; // with styled-components
 import Fade from './types/Pure/Fade';
 
 const types = {
