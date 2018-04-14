@@ -13,19 +13,15 @@
 ```javascript
 import Animated from 'react-animated-transitions';
 
-// fade on mount a single node
+// animates a child
 <Animated>
-  <Node />
-</Animated>;
+  <Foo />
+</Animated>
 
-// fade on mount/unmount a list of nodes
+// animates a group of children
 <Animated items>
-  {nodes.map(node => (
-    <Animated key={node} item>
-      <Node />
-    </Animated>
-  ))}
-</Animated>;
+  {foos.map(() => <Animated item><Foo /></Animated>)}
+</Animated>
 
 // available presets
 <Animated preset="fade" /> // default
@@ -39,6 +35,7 @@ import Animated from 'react-animated-transitions';
 
 // to pass a custom preset, you need to add its css first
 // take a look a the css of the included presets to get an idea
+// it is based on react-transition-group
 
 // foo.css
 .foo-appear,
@@ -61,13 +58,19 @@ import Animated from 'react-animated-transitions';
   /* transition definition */
 }
 
+// ..
+
 import './foo.css';
 
-<Animated preset="foo" />
+<Animated preset="foo">
+  <Bar />
+</Animated>
 
-// to pass a custom timeout in ms
-<Animated preset="foo" timeout={1000} />
-// included presets have a 400ms timeout, you can customize your own presets only
+// to pass a custom timeout in ms (it should match your css)
+<Animated preset="foo" timeout={1000}>
+  <Baz />
+</Animated>
+// included presets have a default 400ms timeout, you can customize your own presets only
 ```
 
 ## Example
