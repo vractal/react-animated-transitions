@@ -12,7 +12,8 @@ const Fade = styled(Transition)`
   &.appear-active,
   &.enter-active {
     opacity: 1;
-    transition: opacity ${props => props.timeout}ms ease-in;
+    transition: opacity ${props => props.timeout}ms ease-in
+      ${props => props.delay}ms;
   }
 
   &.exit {
@@ -21,15 +22,18 @@ const Fade = styled(Transition)`
 
   &.exit-active {
     opacity: 0;
-    transition: opacity ${props => props.timeout}ms ease-out;
+    transition: opacity ${props => props.timeout}ms ease-out
+      ${props => props.delay}ms;
   }
 `;
 
 Fade.propTypes = {
+  delay: PropTypes.number,
   timeout: PropTypes.number
 };
 
 Fade.defaultProps = {
+  delay: 0,
   timeout: 400
 };
 
