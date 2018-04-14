@@ -3,32 +3,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
 
-import TransitionItem from './TransitionItem';
+import Transition from './Transition';
 
-import Fade from './types/Fade';
-import Scale from './types/Scale';
-import SlideLeft from './types/SlideLeft';
-import SlideRight from './types/SlideRight';
+import './types/Fade.css';
+import './types/Scale.css';
+import './types/SlideLeft.css';
+import './types/SlideRight.css';
 
-const types = {
-  fade: Fade,
-  scale: Scale,
-  slideLeft: SlideLeft,
-  slideRight: SlideRight
-};
+const Animated = ({ items, ...props }) => {
+  if (items)
+    return <TransitionGroup {...props} item={props.item || undefined} />;
 
-const Animated = ({ items, type, ...props }) => {
-  if (items) return <TransitionGroup>{props.children}</TransitionGroup>;
-
-  return <TransitionItem {...props} Type={types[type]} />;
+  return <Transition {...props} timeout={400} />;
 };
 
 Animated.propTypes = {
   children: PropTypes.any.isRequired,
   item: PropTypes.bool,
   items: PropTypes.bool,
-  // todo: don't throw for <Animated items />
-  type: PropTypes.oneOf(Object.keys(types)) // .isRequired
+  type: PropTypes.oneOf(['fade', 'scale', 'slideLeft', 'slideRight'])
 };
 
 Animated.defaultProps = {
