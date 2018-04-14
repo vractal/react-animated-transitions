@@ -5,8 +5,7 @@ import TransitionGroup from 'react-transition-group/TransitionGroup';
 
 import TransitionItem from './TransitionItem';
 
-// import Fade from './types/Fade'; // with styled-components
-import Fade from './types/Pure/Fade';
+import Fade from './types/Fade';
 
 const types = {
   fade: Fade
