@@ -1,19 +1,25 @@
 .slideRight-appear,
 .slideRight-enter {
+  opacity: 0;
   transform: translateX(100%);
 }
 
 .slideRight-appear-active,
 .slideRight-enter-active {
+  opacity: 1;
   transform: translateX(0%);
-  transition: transform 400ms ease-in;
+  transition-property: opacity, transform;
+  transition: 400ms ease-in;
 }
 
 .slideRight-exit {
+  opacity: 1;
   transform: translateX(0%);
 }
 
 .slideRight-exit-active {
+  opacity: 0;
   transform: translateX(100%);
-  transition: transform 400ms ease-out;
+  transition-property: opacity, transform;
+  transition: 400ms ease-out;
 }
