@@ -1,0 +1,50 @@
+.custom-appear,
+.custom-enter {
+  opacity: 0;
+  transform: rotateZ(0deg) scale(0);
+}
+
+.custom-appear-active,
+.custom-enter-active {
+  opacity: 1;
+  transform: rotateZ(360deg) scale(1);
+  transition-property: opacity, transform;
+  transition: 1s;
+}
+
+.custom-exit {
+  opacity: 1;
+  transform: rotateZ(360deg) scale(1);
+}
+
+.custom-exit-active {
+  opacity: 0;
+  transform: rotateZ(0deg) scale(0);
+  transition-property: opacity, transform;
+  transition: 1s;
+}
+
+/* keyframes work too */
+
+/*
+@keyframes custom {
+  0% {
+    opacity: 0;
+    transform: rotateZ(0deg) scale(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: rotateZ(360deg) scale(1);
+  }
+}
+
+.custom-appear,
+.custom-enter,
+.custom-appear-active,
+.custom-enter-active,
+.custom-exit,
+.custom-exit-active {
+  animation: custom 1s;
+}
+*/

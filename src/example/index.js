@@ -9,8 +9,10 @@ import Typography from 'material-ui/Typography';
 
 import Animated from '../lib/Animated';
 
+import './custom.css';
+
 export default class Example extends Component {
-  state = { list: ['Hello World!'], preset: 'fade' };
+  state = { list: ['Hello World!'], preset: 'fade', timeout: 400 };
 
   add = () => this.setState({ list: this.state.list.concat(lorem()) });
 
@@ -24,17 +26,19 @@ export default class Example extends Component {
   renderPreset = preset => (
     <Button
       disabled={this.state.preset === preset}
-      onClick={() => this.setState({ preset })}
+      onClick={() =>
+        this.setState({ preset, timeout: preset === 'custom' ? 1000 : 400 })
+      }
       style={styles.btn}>
       {preset}
     </Button>
   );
 
   render() {
-    const { list, preset } = this.state;
+    const { list, preset, timeout } = this.state;
 
     return (
-      <Animated preset={preset}>
+      <Animated preset={preset} timeout={timeout}>
         <div style={styles.container}>
           <div style={styles.row}>
             <Button onClick={this.add} style={styles.btn} variant="raised">
@@ -53,12 +57,13 @@ export default class Example extends Component {
             {this.renderPreset('scale')}
             {this.renderPreset('slideLeft')}
             {this.renderPreset('slideRight')}
+            {this.renderPreset('custom')}
           </div>
 
           <List>
             <Animated items>
               {list.map(item => (
-                <Animated preset={preset} key={item} item>
+                <Animated preset={preset} timeout={timeout} key={item} item>
                   <Paper square style={styles.paper}>
                     <ListItem button onClick={() => this.remove(item)}>
                       <ListItemText primary={item} />
@@ -69,10 +74,10 @@ export default class Example extends Component {
             </Animated>
           </List>
 
-          <Animated preset={preset}>
+          <Animated preset={preset} timeout={timeout}>
             <Animated items>
               {list.length > 0 && (
-                <Animated preset={preset} item>
+                <Animated preset={preset} timeout={timeout} item>
                   <Typography variant="caption" style={styles.caption}>
                     Click an item to remove it
                   </Typography>
