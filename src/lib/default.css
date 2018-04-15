@@ -1,29 +1,19 @@
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
+.react-animated-transitions-fade-appear,
+.react-animated-transitions-fade-enter {
+  opacity: 0;
 }
 
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0;
-  }
+.react-animated-transitions-fade-appear-active,
+.react-animated-transitions-fade-enter-active {
+  opacity: 1;
+  transition: opacity 400ms ease-in;
 }
 
-.react-animated-transitions-fadeIn {
-  animation-name: fadeIn;
-  animation-duration: 1000ms;
+.react-animated-transitions-fade-exit {
+  opacity: 1;
 }
 
-.react-animated-transitions-fadeOut {
-  animation-name: fadeOut;
-  animation-duration: 1000ms;
+.react-animated-transitions-fade-exit-active {
+  opacity: 0;
+  transition: opacity 400ms ease-out;
 }

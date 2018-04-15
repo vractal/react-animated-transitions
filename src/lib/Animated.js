@@ -19,8 +19,8 @@ const Animated = ({ disabled, items, ...props }) => {
 
   // default animation is fadeIn/fadeOut
   if (!preset && !(enter || exit)) {
-    propsCopy.enter = 'react-animated-transitions-fadeIn';
-    propsCopy.exit = 'react-animated-transitions-fadeOut';
+    propsCopy.preset = 'react-animated-transitions-fade';
+    propsCopy.timeout = 400;
   }
 
   // if only animate on enter
