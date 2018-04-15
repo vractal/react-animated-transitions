@@ -6,21 +6,21 @@
 
 ## Installation
 
-`yarn add react-transition-group animate.css react-animated-transitions`
+`yarn add react-transition-group react-animated-transitions animate.css`
 
-`animate.css` is optional, but without it you will have to write your own transition presets. The package includes only a single preset out of the box (fade transition).
+`animate.css` is optional, without it you will have to write your own transition presets. The package includes only a single preset out of the box (a simple fade transition).
 
 ## Usage
 
 ```javascript
 import Animated from 'react-animated-transitions';
 
-// animates a child
+// animate a child (when mounted/unmounted)
 <Animated>
   <Foo />
 </Animated>
 
-// animates a group of children
+// animate a group of children
 <Animated items>
   {foos.map(() => <Animated item><Foo /></Animated>)}
 </Animated>
@@ -37,6 +37,20 @@ import 'animate.css'; // once, you don't need it if you are using your custom pr
 // you can use any combination
 <Animated enter="fadeIn" exit="fadeOut" />
 <Animated enter="tada" exit="zoomOut" />
+
+// you can import presets individually as well
+import 'animate.css/source/attention_seekers/tada.css';
+import 'animate.css/source/zooming_exits/zoomOut.css';
+
+// when you import individually, you need add the duration to your css
+
+/* duration.css */
+
+.animated {
+  animation-duration: 1000ms;
+}
+
+import './duration.css'; // after individual imports
 ```
 
 Presets are not needed for `<Animated items />`, you can use them with `<Animated />` and `<Animated item />`.
@@ -68,7 +82,26 @@ To pass a custom preset, you need to add its css first, which is based on [react
   /* transition definition */
 }
 
-/* take a look at the included fade preset source to get an idea */
+/* example: fade.css */
+.fade-appear,
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-appear-active,
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 400ms ease-in;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 400ms ease-out;
+}
 ```
 
 Then in your JavaScript:
@@ -84,12 +117,15 @@ import './foo.css';
 The timeout should match the css transition duration.
 
 ```javascript
-<Animated timeout={1000} /> // default is 1s, in ms
+<Animated timeout={1000} /> // default is 1000ms
+
+// different timeout for entrance and exit
+<Animated timeout={{ enter: 750, exit: 500 }} />
 ```
 
 ### Overwriting `animate.css` duration and delay props
 
-`animate.css` presets have a default timeout of 1000ms.
+`animate.css` presets have a default timeout of 1000ms, to change this number you can overwrite the css.
 
 ```css
 /* overwrite.css */
@@ -97,17 +133,23 @@ The timeout should match the css transition duration.
 /* global */
 .animated {
   animation-duration: 3s;
-  animation-delay: 2s;
-  animation-iteration-count: infinite;
+
+  /* other available option */
+  /* animation-delay: 2s; */
+  /* animation-iteration-count: infinite; */
 }
 
 /* specific */
 .animated.fadeIn {
   animation-duration: 3s;
-  animation-delay: 2s;
-  animation-iteration-count: infinite;
+
+  /* other available option */
+  /* animation-delay: 2s; */
+  /* animation-iteration-count: infinite; */
 }
 ```
+
+Then in your JavaScript:
 
 ```javascript
 import './overwrite.css'; // make sure you include animate.css before this line
@@ -115,8 +157,16 @@ import './overwrite.css'; // make sure you include animate.css before this line
 <Animated timeout={3000} />;
 ```
 
-## Example
+### Disabling animation
+
+Sometimes you may want your component to not animate, but it still being wrapped in `<Animated />`.
+
+```javascript
+<Animated disabled />
+```
+
+## Examples
 
 [![Edit 4ron7o8157](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/4ron7o8157)
 
-Available [here](https://github.com/sonaye/react-animated-transitions/tree/master/src/example).
+Available [here](https://github.com/sonaye/react-animated-transitions/tree/master/src/examples).

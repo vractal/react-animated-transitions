@@ -21,6 +21,8 @@ class Transition extends Component {
   state = { in: false };
 
   componentDidMount() {
+    // the component should be mounted first
+    // then we change its transition state
     if (!this.props.item) this.setState({ in: true });
   }
 
