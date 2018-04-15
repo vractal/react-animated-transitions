@@ -5,7 +5,7 @@ import TransitionGroup from 'react-transition-group/TransitionGroup';
 
 import Transition from './Transition';
 
-import './fade.css';
+import './default.css';
 
 const Animated = ({ disabled, items, ...props }) => {
   if (disabled) return props.children;
