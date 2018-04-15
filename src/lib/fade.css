@@ -8,11 +8,6 @@
   }
 }
 
-.react-animated-transitions-fadeIn {
-  animation-name: fadeIn;
-  animation-duration: 1000ms;
-}
-
 @keyframes fadeOut {
   from {
     opacity: 1;
@@ -21,6 +16,11 @@
   to {
     opacity: 0;
   }
+}
+
+.react-animated-transitions-fadeIn {
+  animation-name: fadeIn;
+  animation-duration: 1000ms;
 }
 
 .react-animated-transitions-fadeOut {

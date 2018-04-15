@@ -5,18 +5,22 @@ import Paper from 'material-ui/Paper';
 
 import Animated from '../lib/Animated';
 
+import './overwrite.css';
+
 export default class Basic extends Component {
   state = { show: true };
 
   toggle = () => this.setState({ show: !this.state.show });
 
   render() {
+    const transition = { timeout: 500 };
+
     return (
-      <Animated>
+      <Animated {...transition}>
         <div style={styles.container}>
-          <Animated items>
+          <Animated {...transition} items>
             {this.state.show && (
-              <Animated item>
+              <Animated {...transition} item>
                 <Paper style={styles.circle} />
               </Animated>
             )}

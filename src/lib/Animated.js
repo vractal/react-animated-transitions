@@ -12,7 +12,7 @@ const Animated = ({ disabled, items, ...props }) => {
 
   if (items) return <TransitionGroup>{props.children}</TransitionGroup>;
 
-  const { enter, exit, preset } = props;
+  const { enter, exit, preset, timeout } = props;
 
   // avoid mutating params
   const propsCopy = props;
@@ -26,7 +26,7 @@ const Animated = ({ disabled, items, ...props }) => {
   // if only animate on enter
   if (enter && !exit)
     propsCopy.timeout = {
-      enter: props.timeout,
+      enter: timeout,
       exit: 0
     };
 
@@ -34,7 +34,7 @@ const Animated = ({ disabled, items, ...props }) => {
   if (!enter && exit)
     propsCopy.timeout = {
       enter: 0,
-      exit: props.timeout
+      exit: timeout
     };
 
   return <Transition {...propsCopy} />;

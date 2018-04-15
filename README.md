@@ -132,20 +132,12 @@ The timeout should match the css transition duration.
 
 /* global */
 .animated {
-  animation-duration: 3s;
-
-  /* other available option */
-  /* animation-delay: 2s; */
-  /* animation-iteration-count: infinite; */
+  animation-duration: 3000ms;
 }
 
 /* specific */
 .animated.fadeIn {
-  animation-duration: 3s;
-
-  /* other available option */
-  /* animation-delay: 2s; */
-  /* animation-iteration-count: infinite; */
+  animation-duration: 3000ms;
 }
 ```
 
