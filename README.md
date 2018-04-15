@@ -123,7 +123,7 @@ The timeout should match the css transition duration.
 <Animated timeout={{ enter: 750, exit: 500 }} />
 ```
 
-### Overwriting `animate.css` duration and delay props
+### Overwriting `animate.css` default duration
 
 `animate.css` presets have a default timeout of 1000ms, to change this number you can overwrite the css.
 
@@ -151,7 +151,7 @@ import './overwrite.css'; // make sure you include animate.css before this line
 
 ### Disabling animation
 
-Sometimes you may want your component to not animate, but it still being wrapped in `<Animated />`.
+Sometimes you may want to prevent your component from animating, but it is still being wrapped in `<Animated />`.
 
 ```javascript
 <Animated disabled />
