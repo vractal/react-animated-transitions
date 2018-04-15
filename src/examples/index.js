@@ -10,8 +10,6 @@ import Typography from 'material-ui/Typography';
 
 import 'animate.css';
 
-import './overwrite.css';
-
 import Animated from '../lib/Animated';
 
 import animations from './animations';
@@ -70,8 +68,7 @@ export default class Example extends Component {
 
     const transition = {
       enter,
-      exit,
-      timeout: 500
+      exit
     };
 
     return (
