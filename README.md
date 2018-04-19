@@ -159,6 +159,4 @@ Sometimes you may want to prevent your component from animating, but it is still
 
 ## Examples
 
-[![Edit 4ron7o8157](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/4ron7o8157)
-
-Available [here](https://github.com/sonaye/react-animated-transitions/tree/master/src/examples).
+[Demo](https://sonaye.github.io/react-animated-transitions). Source available [here](https://github.com/sonaye/react-animated-transitions/tree/master/src/examples).

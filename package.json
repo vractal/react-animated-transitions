@@ -20,10 +20,11 @@
     "eslint-plugin-import": "2.11.0",
     "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-react": "7.7.0",
+    "gh-pages": "1.1.0",
     "lorem-ipsum": "1.0.4",
     "material-ui": "1.0.0-beta.41",
-    "react": "16.3.1",
-    "react-dom": "16.3.1",
+    "react": "16.3.2",
+    "react-dom": "16.3.2",
     "react-scripts": "1.1.4",
     "react-transition-group": "2.3.1"
   },
@@ -31,7 +32,9 @@
     "start": "react-scripts start",
     "lint": "eslint .",
     "prebuild": "rm -rf dist",
-    "build": "NODE_ENV=production babel src/lib --out-dir dist --copy-files"
+    "build": "NODE_ENV=production babel src/lib --out-dir dist --copy-files",
+    "predeploy": "react-scripts build",
+    "deploy": "gh-pages -d build"
   },
   "babel": {
     "presets": ["es2015", "react", "stage-0"]
@@ -49,5 +52,6 @@
   },
   "optionalDependencies": {
     "animate.css": "^3.6.1"
-  }
+  },
+  "homepage": "https://sonaye.github.io/react-animated-transitions"
 }
