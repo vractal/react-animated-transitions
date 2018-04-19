@@ -4,7 +4,7 @@
 
 <img src="https://raw.githubusercontent.com/sonaye/react-animated-transitions/master/demo.gif" width="600">
 
-[Demo](https://sonaye.github.io/react-animated-transitions).
+[Demo](https://sonaye.github.io/react-animated-transitions/).
 
 ## Installation
 
