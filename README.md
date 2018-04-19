@@ -4,6 +4,8 @@
 
 <img src="https://raw.githubusercontent.com/sonaye/react-animated-transitions/master/demo.gif" width="600">
 
+[Demo](https://sonaye.github.io/react-animated-transitions).
+
 ## Installation
 
 `yarn add react-transition-group react-animated-transitions animate.css`
@@ -159,4 +161,4 @@ Sometimes you may want to prevent your component from animating, but it is still
 
 ## Examples
 
-[Demo](https://sonaye.github.io/react-animated-transitions). Source available [here](https://github.com/sonaye/react-animated-transitions/tree/master/src/examples).
+Available [here](https://github.com/sonaye/react-animated-transitions/tree/master/src/examples).
