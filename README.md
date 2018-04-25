@@ -48,9 +48,9 @@ import 'animate.css/source/zooming_exits/zoomOut.css';
 
 /* duration.css */
 
-.animated {
-  animation-duration: 1000ms;
-}
+// .animated {
+//   animation-duration: 1000ms;
+// }
 
 import './duration.css'; // after individual imports
 ```
@@ -119,7 +119,7 @@ import './foo.css';
 The timeout should match the css transition duration.
 
 ```javascript
-<Animated timeout={400} /> // default is 1000ms
+<Animated timeout={500} /> // default is 1000ms
 
 // different timeout for entrance and exit
 <Animated timeout={{ enter: 750, exit: 500 }} />
