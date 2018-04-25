@@ -93,7 +93,7 @@ To pass a custom preset, you need to add its css first, which is based on [react
 .fade-appear-active,
 .fade-enter-active {
   opacity: 1;
-  transition: opacity 400ms ease-in;
+  transition: opacity 1000ms ease-in;
 }
 
 .fade-exit {
@@ -102,7 +102,7 @@ To pass a custom preset, you need to add its css first, which is based on [react
 
 .fade-exit-active {
   opacity: 0;
-  transition: opacity 400ms ease-out;
+  transition: opacity 1000ms ease-out;
 }
 ```
 
@@ -119,7 +119,7 @@ import './foo.css';
 The timeout should match the css transition duration.
 
 ```javascript
-<Animated timeout={1000} /> // default is 1000ms
+<Animated timeout={400} /> // default is 1000ms
 
 // different timeout for entrance and exit
 <Animated timeout={{ enter: 750, exit: 500 }} />
