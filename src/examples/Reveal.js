@@ -33,8 +33,6 @@ export default class Reveal extends PureComponent {
     const extraMarginPixels =
       (this.state.reveal.length - (minBoxesToShow - 1)) * boxMargin;
 
-    console.log(extraMarginPixels);
-
     const isScrollingDown = e.srcElement.body.scrollTop > extraMarginPixels;
 
     const hasBoxesLeft = this.state.reveal.length < this.state.boxes.length;
