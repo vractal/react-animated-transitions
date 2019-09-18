@@ -26,7 +26,7 @@
     "react": "16.3.2",
     "react-dom": "16.3.2",
     "react-scripts": "1.1.4",
-    "react-transition-group": "2.3.1"
+    "react-transition-group": "4.2.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -37,14 +37,20 @@
     "deploy": "gh-pages -d build"
   },
   "babel": {
-    "presets": ["es2015", "react", "stage-0"]
+    "presets": [
+      "es2015",
+      "react",
+      "stage-0"
+    ]
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "prop-types": "^15.6.1"
   },
   "peerDependencies": {
-    "react-transition-group": "^2.3.1"
+    "react-transition-group": "^4.2.2"
   },
   "optionalDependencies": {
     "animate.css": "^3.6.1"
